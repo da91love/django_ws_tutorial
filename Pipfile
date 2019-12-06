@@ -9,6 +9,7 @@ verify_ssl = true
 django = "==2.2"
 channels = "*"
 channels-redis = "*"
+events = "*"
 
 [requires]
 python_version = "3.6"

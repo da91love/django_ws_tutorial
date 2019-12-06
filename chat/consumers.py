@@ -1,8 +1,12 @@
 # chat/consumers.py
 from channels.generic.websocket import WebsocketConsumer
+from events import Events
 import json
 
+events = Events()
+
 class ChatConsumer(WebsocketConsumer):
+
     def connect(self):
         self.accept()
 
@@ -11,7 +15,7 @@ class ChatConsumer(WebsocketConsumer):
 
     def receive(self, text_data):
         text_data_json = json.loads(text_data)
-        message = text_data_json['message']
+        message = text_data_json['json']
 
         self.send(text_data=json.dumps({
             'message': message
