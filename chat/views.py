@@ -20,14 +20,14 @@ def room(request, room_name):
     })
 
 @csrf_exempt
-def listener(request):
+def listener(request, room_name):
     try:
         status = request.GET.get('status', None)
         progress = request.GET.get('progress', None)
         message = request.GET.get('message', None)
 
         layer = get_channel_layer()
-        async_to_sync(layer.group_send)('event', {
+        async_to_sync(layer.group_send)(room_name, {
             'type': 'listener',
             'content': {
                 'status': status,
